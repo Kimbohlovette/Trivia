@@ -50,6 +50,8 @@ def create_app(test_config=None):
 
       paginated_questions = [question.format() for question in questions[start:end]]
       total_questions = len(questions)
+      if len(paginated_questions)<1:
+        abort(404)
 
       return jsonify({
         "questions": paginated_questions,
@@ -63,19 +65,16 @@ def create_app(test_config=None):
 
       question = Question.query.filter(Question.id==question_id).one_or_none()
       if question is None:
-        abort(404)
+        abort(422)
       question.delete()
       
       return jsonify({"success": True})
 
-    """
-    TEST: When you submit a question on the "Add" tab,
-    the form will clear and the question will appear at the end of the last page
-    of the questions list in the "List" tab.
-    """
     @app.route('/questions', methods=["PUT"])
     def create_question():
       body = request.get_json()
+      if (body.get("question")=="" or body.get("answer")==""):
+        abort(405)
       try:
         question = Question(
         question = body.get("question"),
@@ -85,76 +84,70 @@ def create_app(test_config=None):
         question.insert()
         return jsonify({"success": True})
       except:
-        abort(422)
+        abort(405)
 
-    """
-    TEST: Search by any phrase. The questions list will update to include
-    only question that include that string within their question.
-    Try using the word "title" to start.
-    """
 
     @app.route('/questions', methods=['POST'])
     def search_questions():
       body = request.get_json()
       searchTerm = body.get('searchTerm')
 
+      all_questions = Question.query.all()
       query = Question.query.filter(Question.question.ilike('%'+searchTerm + '%')).all()
       matched_questions = [question.format() for question in query]
 
       return jsonify({
         "questions": matched_questions,
-        "totalQuestions": len(query),
+        "totalQuestions": len(all_questions),
         "currentCategory": ""
       })
 
-    """
-    TEST: In the "List" tab / main screen, clicking on one of the
-    categories in the left column will cause only questions of that
-    category to be shown.
-    """
+
     @app.route('/categories/<int:cat_id>/questions', methods=['GET'])
     def filter_questions_by_category(cat_id):
       try:
         cat = Category.query.filter(Category.id==cat_id).one_or_none()
         if cat is None:
           abort(404)
+        all_questions = Question.query.all()
         questions = Question.query.filter(Question.category==cat_id).all()
 
         return jsonify({
           "questions": [question.format() for question in questions],
           "currentCategory": cat.type,
-          "totalQuestions": len(questions)
+          "totalQuestions": len(all_questions)
         })
       except:
         abort(404)
 
-    """
-    TEST: In the "Play" tab, after a user selects "All" or a category,
-    one question at a time is displayed, the user is allowed to answer
-    and shown whether they were correct or not.
-    """
+  
     @app.route('/quizzes', methods=["POST"])
     def play():
       body = request.get_json()
       quiz_category = body.get('quiz_category')['type']
-      print(quiz_category)
       previous_questions = body.get('previous_questions')
+      if quiz_category == "" or previous_questions == None:
+        abort(422)
 
-      if quiz_category == "click":
-        questions = Question.query.all()
-        random_index = random.randint(0, len(questions)-1)
-      else:
-        cat = Category.query.filter(Category.type.ilike('%'+quiz_category+'%')).all()
-        cat_id = cat[0].id
+      try:
+        if quiz_category == "click":
+          questions = Question.query.all()
+          random_index = random.randint(0, len(questions)-1)
+          random_question = questions[random_index].format()
 
-        questions = Question.query.filter(Question.id not in previous_questions, Question.category==cat_id).all()
-        random_index = random.randint(0, len(questions)-1)
+          return jsonify({ "question": random_question })
 
-      random_question = questions[random_index].format()
+        else:
+          cat = Category.query.filter(Category.type.ilike('%'+quiz_category+'%')).all()
+          cat_id = cat[0].id
 
-      return jsonify({
-        "question": random_question
-      })
+          questions = Question.query.filter(Question.id not in previous_questions, Question.category==cat_id).all()
+          random_index = random.randint(0, len(questions)-1)
+
+          random_question = questions[random_index].format()
+          return jsonify({ "question": random_question })
+      except:
+        abort(422)
 
   
     @app.errorhandler(404)
@@ -169,6 +162,12 @@ def create_app(test_config=None):
         return (
             jsonify({"success": False, "error": 422, "message": "unprocessable"}),
             422,
+        )
+    @app.errorhandler(405)
+    def not_found(error):
+        return (
+            jsonify({"success": False, "error": 405, "message": "method not allowed"}),
+            405,
         )
 
     return app
