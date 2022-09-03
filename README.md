@@ -23,6 +23,14 @@ In order to install backend dependencies and run the server, do the following
 
 - Run move into the backend directory by running the `cd backend` provided you are in the Trivia directory
 
+- Create a virtual environment for your backend project by running the following command
+
+    `python3 -m venv venv`
+ 
+- Activate the virtual environment by running
+
+    `source venv/bin/activate`
+
 - Run `pip3 install -r requirements.txt` to install all dependencies for the backend.
 
 - In order to setup the postgresql database in your system, 
