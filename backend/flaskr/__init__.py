@@ -139,9 +139,17 @@ def create_app(test_config=None):
 
         try:
             if quiz_category == "click":
+
                 questions = Question.query.all()
-                random_index = random.randint(0, len(questions) - 1)
-                random_question = questions[random_index].format()
+                not_prev_selected_questions = [
+                    question for question in questions if question.id not in previous_questions]
+
+                if not_prev_selected_questions == []:
+                    return jsonify({"question": None})
+                random_index = random.randint(
+                    0, len(not_prev_selected_questions) - 1)
+                random_question = not_prev_selected_questions[random_index].format(
+                )
 
                 return jsonify({"question": random_question})
 
@@ -152,11 +160,19 @@ def create_app(test_config=None):
                 cat_id = cat[0].id
 
                 questions = Question.query.filter(
-                    Question.id not in previous_questions,
                     Question.category == cat_id).all()
-                random_index = random.randint(0, len(questions) - 1)
 
-                random_question = questions[random_index].format()
+                not_prev_selected_questions = [
+                    question for question in questions if question.id not in previous_questions]
+
+                if not_prev_selected_questions == []:
+                    return jsonify({"question": None})
+
+                random_index = random.randint(
+                    0, len(not_prev_selected_questions) - 1)
+                random_question = not_prev_selected_questions[random_index].format(
+                )
+
                 return jsonify({"question": random_question})
         except BaseException:
             abort(422)
@@ -170,11 +186,11 @@ def create_app(test_config=None):
     def unprocessable(error):
         return (
             jsonify(
-              {
-                "success": False,
-                "error": 422,
-                "message": "unprocessable"
-              }),
+                {
+                    "success": False,
+                    "error": 422,
+                    "message": "unprocessable"
+                }),
             422,
         )
 
