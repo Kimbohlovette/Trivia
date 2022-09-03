@@ -6,7 +6,15 @@ from flask_sqlalchemy import SQLAlchemy
 
 from flaskr import create_app
 from models import setup_db, Question, Category
+from dotenv import load_dotenv
 
+load_dotenv()
+
+DATABASE_NAME = os.getenv('TEST_DB_NAME',"trivia_test")
+DATABASE_PASSWORD = os.getenv('TEST_DB_PASSWORD',"postgres")
+DATABASE_HOST = os.getenv('TEST_DB_HOST',"localhost:5432")
+DATABASE_USER = os.getenv('TEST_DB_USER', "postgres")
+DATABASE_PATH = 'postgresql://{}:{}@{}/{}'.format(DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_NAME)
 
 class TriviaTestCase(unittest.TestCase):
     """This class represents the trivia test case"""
@@ -15,11 +23,7 @@ class TriviaTestCase(unittest.TestCase):
         """Define test variables and initialize app."""
         self.app = create_app()
         self.client = self.app.test_client
-        self.database_name = "trivia_test"
-        self.username = "postgres"
-        self.password = "abc"
-        self.database_path = "postgresql://{}:{}@{}/{}".format(
-            self.username, self.password, 'localhost:5432', self.database_name)
+        self.database_path = DATABASE_PATH
         setup_db(self.app, self.database_path)
 
         # binds the app to the current context
