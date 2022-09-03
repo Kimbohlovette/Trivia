@@ -80,7 +80,7 @@ A sample error message response
 
 ## Endpoints
 
-### *[ **GET** ] http://localhost:5000/categories*
+### *[ GET ] http://localhost:5000/categories*
 
 - **Request data**: No data or parameters required
 
@@ -104,7 +104,7 @@ Sample response:
 
 ```
 
-### *[ **GET** ] http://localhost:5000/questions?page=1*
+### *[ GET ] http://localhost:5000/questions?page=1*
 
 - **Request data**: No data or parameters required
 
@@ -139,7 +139,7 @@ Sample response:
 
 ```
 
-### *[ **GET** ] http://localhost:5000/categories/\<int:cat_id\>/questions*
+### *[ GET ] http://localhost:5000/categories/cat_id/questions*
 
 - **Request data**: No data or parameters required
 
@@ -166,7 +166,7 @@ Sample response:
 
 ```
 
-### *[ **POST** ] http://localhost:5000/questions*
+### *[ POST] http://localhost:5000/questions*
 
 - Searches the database for questions that match search key
 
@@ -202,7 +202,7 @@ Sample response:
 
 ```
 
-### *[ **PUT** ] http://localhost:5000/questions*
+### *[ PUT ] http://localhost:5000/questions*
 
 - Sends a request to create a new question
 
@@ -228,7 +228,7 @@ Sample response:
 
 ```
 
-### *[ **POST** ] http://localhost:5000/questions/<int:id>*
+### *[ POST] http://localhost:5000/questions/id*
 
 - Deletes the question with the id `id`.
 
@@ -247,7 +247,7 @@ Sample response:
 ```
 
 
-### *[ **POST** ] http://localhost:5000/quizzes*
+### *[ POST ] http://localhost:5000/quizzes*
 
 - This endpoint sends previous questions answered by a student with the category and then returns a single question for user to answer
 
