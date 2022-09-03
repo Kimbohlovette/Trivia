@@ -228,7 +228,7 @@ Sample response:
 
 ```
 
-### *[ POST] http://localhost:5000/questions/id*
+### *[ GET] http://localhost:5000/questions/id*
 
 - Deletes the question with the id `id`.
 
@@ -282,6 +282,22 @@ Sample response:
 }
 
 ```
+
+# Deployment
+
+(localhost)
+
+# Authors
+
+- Kimboh Lovette Bantar
+
+# Acknowledgments
+
+- Many thanks to all Udacity session leads helped me pull through this project to this stage
+
+- Thanks to my family and friends for the many ways they have supported me to reach this stage of the project.
+
+##End
 
 
 
