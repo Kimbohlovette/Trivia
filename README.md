@@ -242,7 +242,7 @@ Sample response:
 
 ```
 
-### *[ GET] http://localhost:5000/questions/id*
+### *[ DELETE] http://localhost:5000/questions/id*
 
 - Deletes the question with the id `id`.
 
@@ -250,13 +250,14 @@ Sample response:
 
 - **Request arguments**: Integer `id`
 
-- **Returns**: Returns success on a successful delete operation
+- **Returns**: Returns a json object that contains a success message and the id of the deleted question on a successful delete operation
 
 **Sample response**
 
 ```
 { 
-  "success": True
+  "success": True,
+  "id": 13
 }
 ```
 
