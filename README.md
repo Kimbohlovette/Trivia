@@ -82,6 +82,8 @@ A sample error message response
 
 ### *[ GET ] http://localhost:5000/categories*
 
+- Endpoint to get all categories as a dictionary object all keys being the category id's and values the category types.
+
 - **Request data**: No data or parameters required
 
 - **Request aguments**: No data or parameters required
@@ -105,6 +107,8 @@ Sample response:
 ```
 
 ### *[ GET ] http://localhost:5000/questions?page=1*
+
+- Retrieves a list of paginated questions
 
 - **Request data**: No data or parameters required
 
@@ -140,6 +144,8 @@ Sample response:
 ```
 
 ### *[ GET ] http://localhost:5000/categories/cat_id/questions*
+
+- Retrieves a list of cateogories by id.
 
 - **Request data**: No data or parameters required
 
