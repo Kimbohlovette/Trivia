@@ -47,7 +47,7 @@ In order to install backend dependencies and run the server, do the following
 
 - In order to run backend tests,
     
-    - Install `unittest` flask unit test library
+    - Install `flask-unittest` flask unit test library using the command `pip install flask-unittest`
     - Run `python3 -m test_flaskr --verbose`
 
 If the backend test runs successfully then you are good to go.
