@@ -30,12 +30,12 @@ In order to install backend dependencies and run the server, do the following
     1. `sudo -u postgres -i` to login into postgresql environment. (you will be asked to enter credendials for your computer)
 
     2. `dropdb trivia & createdb trivia` to create the trivia database.
-
-    3. In the postgres database terminal, run the command 
+    3. `psql trivia` to login into the psql terminal with the *trivia* database
+    4. In the postgres database terminal, run the command 
 
         `\i ./tivia.psql` to setup database tables and populate the tables with data.
     
--Start the backend server by running `FLASK_APP=flaskr FLASK_DEBUG=1 flask run`
+- Start the backend server by running `FLASK_APP=flaskr FLASK_DEBUG=1 flask run`
 
 - In order to run backend tests,
     
@@ -54,6 +54,245 @@ If the backend test runs successfully then you are good to go.
 - Start the frontend server by running `npm start`
 
 # API Documentation
+
+## Getting started with Trivia API
+
+The trivia API exposes some endpoints for manipulating and querying the trivia database. The base URL is 
+
+`http://localhost:5000`
+
+## Errors
+
+- ***200*** - Success
+- ***404*** - Resource not found error
+- ***422*** - Bad request
+- ***405*** - Method not allowed
+
+A sample error message response
+
+```
+{
+  "error": 422,
+  "message": "unprocessable",
+  "success": False
+}
+```
+
+## Endpoints
+
+### *[ **GET** ] http://localhost:5000/categories*
+
+- **Request data**: No data or parameters required
+
+- **Request aguments**: No data or parameters required
+
+- Returns: An object with a single key, categories, that contains an object of id: category_string key:value pairs.
+
+Sample response: 
+
+```
+{
+  "categories": {
+    "1": "Science",
+    "2": "Art",
+    "3": "Geography",
+    "4": "History",
+    "5": "Entertainment",
+    "6": "Sports"
+  }
+}
+
+```
+
+### *[ **GET** ] http://localhost:5000/questions?page=1*
+
+- **Request data**: No data or parameters required
+
+- **Request arguments**: *page=1*
+
+- **Returns**: An object with 10 paginated questions, total questions, object including all categories, and current category string.
+
+**Sample response**
+
+```
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "This is a question",
+      "answer": "This is an answer",
+      "difficulty": 5,
+      "category": 2
+    }
+  ],
+  "totalQuestions": 100,
+  "categories": {
+    "1": "Science",
+    "2": "Art",
+    "3": "Geography",
+    "4": "History",
+    "5": "Entertainment",
+    "6": "Sports"
+  },
+  "currentCategory": "History"
+}
+
+```
+
+### *[ **GET** ] http://localhost:5000/categories/\<int:cat_id\>/questions*
+
+- **Request data**: No data or parameters required
+
+- **Request arguments**: integer *cat_id* 
+
+- **Returns**: An object with questions for the specified category, total questions, and current category string
+
+**Sample response**
+
+```
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "This is a question",
+      "answer": "This is an answer",
+      "difficulty": 5,
+      "category": 4
+    }
+  ],
+  "totalQuestions": 100,
+  "currentCategory": "History"
+}
+
+```
+
+### *[ **POST** ] http://localhost:5000/questions*
+
+- Searches the database for questions that match search key
+
+- **Request data**: 
+
+```
+{
+  "searchTerm": "the search string to match"
+}
+```
+
+- **Request arguments**: No arguments
+
+- **Returns**: any array of questions, a number of totalQuestions that met the search term and the current category string
+
+**Sample response**
+
+```
+{
+  {
+  "currentCategory": "",
+  "questions": [
+    {
+      "answer": "Scarab",
+      "category": 4,
+      "difficulty": 4,
+      "id": 23,
+      "question": "Which dung beetle was worshipped by the ancient Egyptians?"
+    }
+  ],
+  "totalQuestions": 19
+}
+
+```
+
+### *[ **PUT** ] http://localhost:5000/questions*
+
+- Sends a request to create a new question
+
+- **Request data**: A json data object containing question, the answer to the question, category of question and it level of difficulty
+
+```
+{
+  "question": "The study of past events is called?",
+  "answer": "History",
+  "category": 4,
+  "difficulty": 2
+}
+```
+
+- **Request arguments**: No arguments
+- **Returns**: Returns a json object containing a success message
+**Sample response**
+
+```
+{
+  "success": true
+}
+
+```
+
+### *[ **POST** ] http://localhost:5000/questions/<int:id>*
+
+- Deletes the question with the id `id`.
+
+- **Request data**: No request body
+
+- **Request arguments**: Integer `id`
+
+- **Returns**: Returns success on a successful delete operation
+
+**Sample response**
+
+```
+{ 
+  "success": True
+}
+```
+
+
+### *[ **POST** ] http://localhost:5000/quizzes*
+
+- This endpoint sends previous questions answered by a student with the category and then returns a single question for user to answer
+
+- **Request data**: A list of previous questions id's, the category 
+
+```
+{
+  "previous_questions": [],
+  "quiz_category": {
+    "type":"Science",
+    "id": 1
+  }
+}
+
+```
+
+- **Request arguments**: No arguments
+
+- **Returns**: Returns a single question object.
+
+**Sample response**
+
+```
+{
+  "question": {
+    "answer": "The Liver",
+    "category": 1,
+    "difficulty": 4,
+    "id": 20,
+    "question": "What is the heaviest organ in the human body?"
+  }
+}
+
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 
