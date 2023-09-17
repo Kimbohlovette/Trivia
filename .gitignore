@@ -1,5 +1,5 @@
 .env
-*/node_modules/
-*/env/
-*/_pycache_
+./frontend/node_modules/
+./backend/env/
+./backend/_pycache_/
 
