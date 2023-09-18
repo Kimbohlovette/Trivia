@@ -13,3 +13,5 @@ six
 SQLAlchemy
 Werkzeug
 babel
+gunicorn
+python-dotenv

@@ -1,20 +1,25 @@
 version: '3.8'
 
 services:
-  web:
-    build: ./frontend
-    ports:
-      -3000:3000
+  # web:
+  #   build: ./frontend
+  #   ports:
+  #     -3000:3000
   api:
     build: ./backend
     ports:
-      -5000:5000
+      - 8080:8080
   db:
     image: postgres:alpine3.18
     ports:
-      -5432:5432
+      - 5432:5432
+    container_name: trivia-db
     volumes:
-      -trivia: /var/lib/postgresql/data
+      - trivia:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-root}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      PGDATA: /data/postgres
 volumes:
-  -trivia:
+  trivia:
 
