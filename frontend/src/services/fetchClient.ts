@@ -13,3 +13,13 @@ export const getQuestionsByCategoryID = async (
 	);
 	return await res.json();
 };
+
+export const deleteQuestion = async (
+	questionID: number
+): Promise<{ success: boolean; id: number }> => {
+	return await (
+		await fetch(`http://0.0.0.0:8080/questions/${questionID}`, {
+			method: 'DELETE',
+		})
+	).json();
+};
