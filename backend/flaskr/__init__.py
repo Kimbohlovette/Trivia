@@ -34,8 +34,10 @@ def create_app(test_config=None):
             try:
 
                 categories = Category.query.all()
-                formated_categories = {
-                    category.id: category.type for category in categories}
+                formated_categories = [
+                    category.format() for category in categories
+                ]
+                   
             except BaseException:
                 abort(404)
 
@@ -47,7 +49,7 @@ def create_app(test_config=None):
         def get_questions():
             try:
                 questions = Question.query.order_by(Question.id).all()
-                categories = {cat.id: cat.type for cat in Category.query.all()}
+                categories = [category.format() for category in Category.query.all()]
             except BaseException:
                 abort(404)
 
