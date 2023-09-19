@@ -19,7 +19,7 @@ export const Questions = () => {
 						<ul className="flex flex-col gap-y-5">
 							{query.data?.categories?.map((cat) => (
 								<li
-									className="hover:text-blue-400 text-slate-600"
+									className="hover:text-blue-400 text-slate-600 cursor-pointer"
 									key={cat.id}
 								>
 									{cat.type}
