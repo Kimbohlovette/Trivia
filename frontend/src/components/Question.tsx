@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { QuestionType, QuestionsData } from '../types';
+import { useState } from 'react';
+import { QuestionType } from '../types';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteQuestion } from '../services/fetchClient';

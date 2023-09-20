@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 	return (
@@ -6,21 +7,27 @@ const Header = () => {
 			<nav>
 				<ul className="flex justify-center gap-x-10">
 					<li>
-						<button className="py-2 px-4 text-slate-600 font-normal border-b-2 border-transparent hover:bg-slate-200 hover:border-b-blue-400">
+						<Link
+							to="/"
+							className="py-2 px-4 text-slate-600 font-normal border-b-2 border-transparent hover:bg-slate-200 hover:border-b-blue-400"
+						>
 							List
-						</button>
+						</Link>
 					</li>
 					<li>
 						{' '}
-						<button className="py-2 px-4 text-slate-600 font-normal border-b-2 border-transparent hover:bg-slate-200 hover:border-b-blue-400">
+						<Link
+							to={'/add'}
+							className="py-2 px-4 text-slate-600 font-normal border-b-2 border-transparent hover:bg-slate-200 hover:border-b-blue-400"
+						>
 							Add
-						</button>
+						</Link>
 					</li>
 					<li>
 						{' '}
-						<button className="py-2 px-4 text-slate-600 font-normal border-b-2 border-transparent hover:bg-slate-200 hover:border-b-blue-400">
+						<a className="py-2 px-4 text-slate-600 font-normal border-b-2 border-transparent hover:bg-slate-200 hover:border-b-blue-400">
 							Play
-						</button>
+						</a>
 					</li>
 				</ul>
 			</nav>

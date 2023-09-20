@@ -17,3 +17,10 @@ export interface CategoryType {
 	id: number;
 	type: string;
 }
+
+export interface CreateFormData {
+	question: string;
+	answer: string;
+	difficulty: number;
+	category: number;
+}

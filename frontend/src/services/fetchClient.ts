@@ -1,4 +1,4 @@
-import { QuestionType, QuestionsData } from '../types';
+import { CategoryType, QuestionType, QuestionsData } from '../types';
 
 export const getQuestionsData = async (): Promise<QuestionsData> => {
 	const res = await fetch('http://0.0.0.0:8080/questions');
@@ -13,6 +13,15 @@ export const getQuestionsByCategoryID = async (
 		: await fetch('http://0.0.0.0:8080/questions');
 	if (res.ok) {
 		return (await res.json()).questions as QuestionType[];
+	} else {
+		return Promise.all([]);
+	}
+};
+
+export const getCategories = async (): Promise<CategoryType[]> => {
+	const res = await fetch(`http://0.0.0.0:8080/categories`);
+	if (res.ok) {
+		return (await res.json()).categories as CategoryType[];
 	} else {
 		return Promise.all([]);
 	}

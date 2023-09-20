@@ -3,6 +3,7 @@ import { QuestionType, CategoryType } from '../types';
 import {
 	getQuestionsData,
 	getQuestionsByCategoryID,
+	getCategories,
 } from '../services/fetchClient';
 import Question from './Question';
 import { useEffect, useState } from 'react';
@@ -18,14 +19,7 @@ export const Questions = () => {
 
 	let query = useQuery<CategoryType[], Error>({
 		queryKey: ['categories'],
-		queryFn: async (): Promise<CategoryType[]> => {
-			const res = await fetch(`http://0.0.0.0:8080/categories`);
-			if (res.ok) {
-				return (await res.json()).categories as CategoryType[];
-			} else {
-				return Promise.all([]);
-			}
-		},
+		queryFn: getCategories,
 
 		staleTime: 1000,
 	});
