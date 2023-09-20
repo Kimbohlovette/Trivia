@@ -1,4 +1,4 @@
-import { CategoryType, QuestionsData } from '../types';
+import { QuestionType, QuestionsData } from '../types';
 
 export const getQuestionsData = async (): Promise<QuestionsData> => {
 	const res = await fetch('http://0.0.0.0:8080/questions');
@@ -6,12 +6,16 @@ export const getQuestionsData = async (): Promise<QuestionsData> => {
 };
 
 export const getQuestionsByCategoryID = async (
-	catID: number
-): Promise<QuestionsData> => {
-	const res = await fetch(
-		`http://0.0.0.0:8080/categories/${catID}/questions`
-	);
-	return await res.json();
+	categoryID?: number
+): Promise<QuestionType[]> => {
+	const res = categoryID
+		? await fetch(`http://0.0.0.0:8080/categories/${categoryID}/questions`)
+		: await fetch('http://0.0.0.0:8080/questions');
+	if (res.ok) {
+		return (await res.json()).questions as QuestionType[];
+	} else {
+		return Promise.all([]);
+	}
 };
 
 export const deleteQuestion = async (
