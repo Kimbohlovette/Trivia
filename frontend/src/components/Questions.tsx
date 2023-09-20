@@ -40,19 +40,23 @@ export const Questions = () => {
 			<main className="flex min-h-screen p-8">
 				<section id="sidebar" className="px-8">
 					<nav>
-						<div className="flex flex-col gap-y-5">
-							{query.data?.map((cat) => (
-								<button
-									onClick={() => {
-										setCategoryID(cat.id);
-									}}
-									className="hover:text-blue-400 text-slate-600"
-									key={cat.id}
-								>
-									{cat.type}
-								</button>
-							))}
-						</div>
+						{query.isLoading ? (
+							'Loading'
+						) : (
+							<div className="flex flex-col gap-y-5">
+								{query.data?.map((cat) => (
+									<button
+										onClick={() => {
+											setCategoryID(cat.id);
+										}}
+										className="hover:text-blue-400 text-slate-600"
+										key={cat.id}
+									>
+										{cat.type}
+									</button>
+								))}
+							</div>
+						)}
 					</nav>
 					<div className="mt-5 flex flex-col gap-2 items-end">
 						<input
@@ -69,11 +73,18 @@ export const Questions = () => {
 					<h2 className="mb-5 text-lg text-slate-700 font-semibold">
 						Questions
 					</h2>
-					<ul className="flex flex-col gap-y-2">
-						{data?.map((question) => (
-							<Question key={question.id} question={question} />
-						))}
-					</ul>
+					{isLoading ? (
+						'Loading questions ....'
+					) : (
+						<ul className="flex flex-col gap-y-2">
+							{data?.map((question) => (
+								<Question
+									key={question.id}
+									question={question}
+								/>
+							))}
+						</ul>
+					)}
 				</section>
 			</main>
 		</>
