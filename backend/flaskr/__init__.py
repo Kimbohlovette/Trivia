@@ -79,7 +79,7 @@ def create_app(test_config=None):
 
             return jsonify({"success": True, "delete_id": question_id})
 
-        @app.route('/questions', methods=['POST'])
+        @app.route('/questions/create', methods=['POST'])
         def create_question():
             body = request.get_json()
             if (body.get("question") == "" or body.get("answer") == ""):

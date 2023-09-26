@@ -21,6 +21,9 @@ const Question = ({ question }: Props) => {
 		onSuccess: () => {
 			// Invalidate and refetch
 			queryClient.invalidateQueries({ queryKey: ['questions'] });
+			queryClient.invalidateQueries({
+				queryKey: ['categories', question.category, 'questions'],
+			});
 		},
 	});
 	return (

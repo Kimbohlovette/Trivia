@@ -1,10 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React from 'react';
-import {
-	createQuestion,
-	getCategories,
-	getQuestionsByCategoryID,
-} from '../services/fetchClient';
+import { createQuestion, getCategories } from '../services/fetchClient';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { CreateFormData } from '../types';
 import { useNavigate } from 'react-router-dom';

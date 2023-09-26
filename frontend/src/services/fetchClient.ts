@@ -1,7 +1,15 @@
-import { CategoryType, QuestionType, QuestionsData } from '../types';
+import {
+	CategoryType,
+	CreateFormData,
+	QuestionType,
+	QuestionsData,
+} from '../types';
+
+///
+const baseUrl = 'http://0.0.0.0:8080';
 
 export const getQuestionsData = async (): Promise<QuestionsData> => {
-	const res = await fetch('http://0.0.0.0:8080/questions');
+	const res = await fetch(`${baseUrl}/questions`);
 	return await res.json();
 };
 
@@ -9,8 +17,8 @@ export const getQuestionsByCategoryID = async (
 	categoryID?: number
 ): Promise<QuestionType[]> => {
 	const res = categoryID
-		? await fetch(`http://0.0.0.0:8080/categories/${categoryID}/questions`)
-		: await fetch('http://0.0.0.0:8080/questions');
+		? await fetch(`${baseUrl}/categories/${categoryID}/questions`)
+		: await fetch(`${baseUrl}/questions`);
 	if (res.ok) {
 		return (await res.json()).questions as QuestionType[];
 	} else {
@@ -19,7 +27,7 @@ export const getQuestionsByCategoryID = async (
 };
 
 export const getCategories = async (): Promise<CategoryType[]> => {
-	const res = await fetch(`http://0.0.0.0:8080/categories`);
+	const res = await fetch(`${baseUrl}/categories`);
 	if (res.ok) {
 		return (await res.json()).categories as CategoryType[];
 	} else {
@@ -31,8 +39,22 @@ export const deleteQuestion = async (
 	questionID: number
 ): Promise<{ success: boolean; id: number }> => {
 	return await (
-		await fetch(`http://0.0.0.0:8080/questions/${questionID}`, {
+		await fetch(`${baseUrl}/questions/${questionID}`, {
 			method: 'DELETE',
+		})
+	).json();
+};
+
+export const createQuestion = async (
+	payload: CreateFormData
+): Promise<{ success: true }> => {
+	return await (
+		await fetch(`${baseUrl}/questions/create`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(payload),
 		})
 	).json();
 };
