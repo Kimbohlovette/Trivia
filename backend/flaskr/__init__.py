@@ -79,7 +79,7 @@ def create_app(test_config=None):
 
             return jsonify({"success": True, "delete_id": question_id})
 
-        @app.route('/questions', methods=["PUT"])
+        @app.route('/questions', methods=['POST'])
         def create_question():
             body = request.get_json()
             if (body.get("question") == "" or body.get("answer") == ""):
@@ -95,10 +95,9 @@ def create_app(test_config=None):
             except BaseException:
                 abort(405)
 
-        @app.route('/questions', methods=['POST'])
+        @app.route('/search', methods=['GET'])
         def search_questions():
-            body = request.get_json()
-            searchTerm = body.get('searchTerm')
+            searchTerm = request.args.get('q', "")
 
             all_questions = Question.query.all()
             query = Question.query.filter(
