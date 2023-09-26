@@ -1,23 +1,50 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 import {
+	createQuestion,
 	getCategories,
 	getQuestionsByCategoryID,
 } from '../services/fetchClient';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { CreateFormData } from '../types';
+import { useNavigate } from 'react-router-dom';
 
 const AddQuestion = () => {
+	const queryClient = useQueryClient();
 	const { data, isLoading, error } = useQuery({
 		queryKey: ['categories'],
 		queryFn: getCategories,
 		staleTime: 1000,
 	});
+
+	const mutation = useMutation({
+		mutationKey: ['questions', 'post'],
+		mutationFn: createQuestion,
+		onSuccess: () => {
+			queryClient.invalidateQueries(['questions']);
+		},
+	});
+
+	const navigation = useNavigate();
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<CreateFormData>();
+	const onSubmit: SubmitHandler<CreateFormData> = (payload) => {
+		mutation.mutate(payload);
+		navigation('/');
+	};
 	return (
 		<div className="flex items-center justify-center py-8">
 			<div className="w-full max-w-lg">
 				<h1 className="my-5 text-2xl font-semibold text-slate-800">
 					Add a question
 				</h1>
-				<form className="flex flex-col gap-4">
+				<form
+					onSubmit={handleSubmit(onSubmit)}
+					className="flex flex-col gap-4"
+				>
 					<label
 						htmlFor="question"
 						className="text-slate-600 font-medium"
@@ -25,6 +52,8 @@ const AddQuestion = () => {
 						Question
 					</label>
 					<input
+						defaultValue=""
+						{...register('question')}
 						id="question"
 						className="py-2 px-4 focus:outline-none border rounded-ms w-full"
 						name="question"
@@ -37,6 +66,8 @@ const AddQuestion = () => {
 						Answer
 					</label>
 					<input
+						defaultValue=""
+						{...register('answer')}
 						id="answer"
 						className="py-2 px-4 focus:outline-none border rounded-ms w-full"
 						name="answer"
@@ -51,8 +82,10 @@ const AddQuestion = () => {
 								Select Category
 							</label>
 							<select
+								defaultValue={1}
+								{...register('category')}
 								className=" py-2 px-4 focus:outline-none border rounded-sm text-slate-600"
-								name="cateogory"
+								name="category"
 								id="category"
 							>
 								{data &&
@@ -73,6 +106,8 @@ const AddQuestion = () => {
 								Select difficulty
 							</label>
 							<select
+								defaultValue={1}
+								{...register('difficulty')}
 								placeholder="Difficulty"
 								className="py-2 px-4 focus:outline-none border rounded-sm text-slate-600"
 								name="cateogory"
@@ -88,7 +123,14 @@ const AddQuestion = () => {
 							</select>
 						</div>
 					</div>
-					<button className="py-2 px-1 text-sm font-medium bg-blue-400 text-white rounded-sm">
+					<button
+						disabled={mutation.isLoading}
+						className={
+							isLoading
+								? 'py-2 px-1 text-sm font-medium bg-blue-400 text-white rounded-sm'
+								: 'py-2 px-1 text-sm font-medium bg-blue-200 text-white rounded-sm'
+						}
+					>
 						Create Question
 					</button>
 				</form>
