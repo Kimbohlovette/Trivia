@@ -83,7 +83,7 @@ def create_app(test_config=None):
         def create_question():
             body = request.get_json()
             if (body.get("question") == "" or body.get("answer") == ""):
-                abort(405)
+                abort(400)
             try:
                 question = Question(
                     question=body.get("question"),
