@@ -4,6 +4,7 @@ import { Questions } from './components/Questions';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Header from './components/Header';
 import AddQuestion from './components/AddQuestion';
+import Play from './components/Play';
 
 const MyApp = () => {
 	return (
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
 		children: [
 			{ path: '/', element: <Questions /> },
 			{ path: '/add', element: <AddQuestion /> },
+			{ path: '/play', element: <Play /> },
 		],
 	},
 ]);

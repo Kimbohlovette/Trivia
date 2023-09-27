@@ -15,7 +15,6 @@ const Header = () => {
 						</Link>
 					</li>
 					<li>
-						{' '}
 						<Link
 							to={'/add'}
 							className="py-2 px-4 text-slate-600 font-normal border-b-2 border-transparent hover:bg-slate-200 hover:border-b-blue-400"
@@ -24,10 +23,12 @@ const Header = () => {
 						</Link>
 					</li>
 					<li>
-						{' '}
-						<a className="py-2 px-4 text-slate-600 font-normal border-b-2 border-transparent hover:bg-slate-200 hover:border-b-blue-400">
+						<Link
+							to={'/play'}
+							className="py-2 px-4 text-slate-600 font-normal border-b-2 border-transparent hover:bg-slate-200 hover:border-b-blue-400"
+						>
 							Play
-						</a>
+						</Link>
 					</li>
 				</ul>
 			</nav>
