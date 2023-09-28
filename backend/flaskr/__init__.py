@@ -154,10 +154,7 @@ def create_app(test_config=None):
                     return jsonify({"question": random_question})
 
                 else:
-                    cat = Category.query.filter(
-                        Category.type.ilike(
-                            '%' + quiz_category + '%')).all()
-                    cat_id = cat[0].id
+                    cat = Category.query.get()
 
                     questions = Question.query.filter(
                         Question.category == cat_id).all()

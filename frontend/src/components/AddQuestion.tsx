@@ -51,7 +51,7 @@ const AddQuestion = () => {
 						defaultValue=""
 						{...register('question')}
 						id="question"
-						className="py-2 px-4 focus:outline-none border rounded-ms w-full"
+						className="py-2 px-4 focus:outline-blue-400 border rounded-full w-full"
 						name="question"
 						type="text"
 					/>
@@ -65,7 +65,7 @@ const AddQuestion = () => {
 						defaultValue=""
 						{...register('answer')}
 						id="answer"
-						className="py-2 px-4 focus:outline-none border rounded-ms w-full"
+						className="py-2 px-4 focus:outline-blue-400 border rounded-full w-full"
 						name="answer"
 						type="text"
 					/>
@@ -80,7 +80,7 @@ const AddQuestion = () => {
 							<select
 								defaultValue={1}
 								{...register('category')}
-								className=" py-2 px-4 focus:outline-none border rounded-sm text-slate-600"
+								className=" py-2 px-4 focus:outline-blue-400 border rounded-full text-slate-600"
 								name="category"
 								id="category"
 							>
@@ -105,7 +105,7 @@ const AddQuestion = () => {
 								defaultValue={1}
 								{...register('difficulty')}
 								placeholder="Difficulty"
-								className="py-2 px-4 focus:outline-none border rounded-sm text-slate-600"
+								className="py-2 px-4 focus:outline-blue-400 border rounded-full w-full"
 								name="cateogory"
 								id="difficulty"
 							>
@@ -123,8 +123,8 @@ const AddQuestion = () => {
 						disabled={mutation.isLoading}
 						className={
 							isLoading
-								? 'py-2 px-1 text-sm font-medium bg-blue-400 text-white rounded-sm'
-								: 'py-2 px-1 text-sm font-medium bg-blue-200 text-white rounded-sm'
+								? 'py-2 px-1 text-sm font-medium bg-blue-300 text-white rounded-full'
+								: 'py-2 px-1 text-sm font-medium bg-blue-500 text-white rounded-full'
 						}
 					>
 						Create Question
