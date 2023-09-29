@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { QuestionType, CategoryType } from '../types';
 import {
-	getQuestionsData,
 	getQuestionsByCategoryID,
 	getCategories,
 } from '../services/fetchClient';
@@ -30,26 +29,19 @@ export const Questions = () => {
 	}, [catID]);
 
 	return (
-		<>
-			<main className="flex min-h-screen p-8">
-				<section className="flex-1" id="content">
-					<h2 className="mb-5 text-lg text-slate-700 font-semibold">
-						Questions
-					</h2>
-					{isLoading ? (
-						'Loading questions ....'
-					) : (
-						<ul className="flex flex-col gap-y-2">
-							{data?.map((question) => (
-								<Question
-									key={question.id}
-									question={question}
-								/>
-							))}
-						</ul>
-					)}
-				</section>
-			</main>
-		</>
+		<section className="flex-1 pt-8" id="content">
+			<h2 className="mb-5 text-lg text-blue-500 font-semibold text-center">
+				Questions
+			</h2>
+			{isLoading ? (
+				'Loading questions ....'
+			) : (
+				<ul className="flex flex-col gap-y-2">
+					{data?.map((question) => (
+						<Question key={question.id} question={question} />
+					))}
+				</ul>
+			)}
+		</section>
 	);
 };

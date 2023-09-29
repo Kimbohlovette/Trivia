@@ -1,4 +1,3 @@
-import React from 'react';
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Questions } from './components/Questions';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -10,7 +9,7 @@ const MyApp = () => {
 	return (
 		<div>
 			<Header />
-			<div className="flex items-center justify-center [&>*]:w-full [&>*]:max-w-3xl">
+			<div className="flex items-center justify-center [&>*]:w-full [&>*]:max-w-3xl px-2 sm:px-4">
 				<Outlet />
 			</div>
 		</div>

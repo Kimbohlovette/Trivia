@@ -1,5 +1,4 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import React from 'react';
 import { createQuestion, getCategories } from '../services/fetchClient';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { CreateFormData } from '../types';
@@ -32,7 +31,7 @@ const AddQuestion = () => {
 		navigation('/');
 	};
 	return (
-		<div className="flex items-center justify-center py-8">
+		<div className="flex items-center justify-center py-8 px-2 sm:px-4">
 			<div className="w-full max-w-lg">
 				<h1 className="my-5 text-2xl font-semibold text-slate-800">
 					Add a question

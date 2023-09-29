@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { QuestionType } from '../types';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -9,12 +8,12 @@ interface Props {
 }
 
 const Question = ({ question }: Props) => {
-	const [showAnswer, setShowAnswer] = useState<boolean>(false);
+	// const [showAnswer, setShowAnswer] = useState<boolean>(false);
 	const queryClient = useQueryClient();
 
-	const handleAnswerVisibility = () => {
-		setShowAnswer((state) => !state);
-	};
+	// const handleAnswerVisibility = () => {
+	// 	setShowAnswer((state) => !state);
+	// };
 	const mutation = useMutation({
 		mutationKey: ['questions', 'delete'],
 		mutationFn: deleteQuestion,
@@ -27,16 +26,14 @@ const Question = ({ question }: Props) => {
 		},
 	});
 	return (
-		<div className="px-2 sm:px-4 shadow-sm rounded-lg border border-slate-100 flex">
+		<div className="px-4 shadow-sm rounded-lg border border-slate-100 flex">
 			<div className="divide-y flex-1">
 				<div className="py-4">
 					<p className="text-slate-800">{question.question}</p>
 					<div className="">
-						{!showAnswer && (
-							<p className="rounded-sm text-sm text-blue-300">
-								{question.answer}
-							</p>
-						)}
+						<p className="rounded-sm text-sm text-blue-300">
+							{question.answer}
+						</p>
 					</div>
 				</div>
 				<div className="flex gap-x-5 py-2 text-sm">
