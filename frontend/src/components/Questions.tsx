@@ -30,9 +30,9 @@ export const Questions = () => {
 
 	return (
 		<section className="flex-1 pt-8" id="content">
-			<h2 className="mb-5 text-lg text-blue-500 font-semibold text-center">
+			<h1 className="text-blue-400 my-3 font-semibold text-2xl">
 				Questions
-			</h2>
+			</h1>
 			{isLoading ? (
 				'Loading questions ....'
 			) : (
