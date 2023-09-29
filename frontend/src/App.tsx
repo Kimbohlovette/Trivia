@@ -10,7 +10,9 @@ const MyApp = () => {
 	return (
 		<div>
 			<Header />
-			<Outlet />
+			<div className="flex items-center justify-center [&>*]:w-full [&>*]:max-w-3xl">
+				<Outlet />
+			</div>
 		</div>
 	);
 };

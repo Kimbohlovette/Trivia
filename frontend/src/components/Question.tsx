@@ -27,38 +27,39 @@ const Question = ({ question }: Props) => {
 		},
 	});
 	return (
-		<div className="py-8 px-4 shadow-sm rounded-sm border border-slate-100">
-			<p className="text-slate-800 mb-4">{question.question}</p>
-			<div className="flex items-center gap-5">
-				<span className="text-slate-500 text-sm">
-					Difficulty: {question.difficulty}
-				</span>
+		<div className="px-2 sm:px-4 shadow-sm rounded-lg border border-slate-100 flex">
+			<div className="divide-y flex-1">
+				<div className="py-4">
+					<p className="text-slate-800">{question.question}</p>
+					<div className="">
+						{!showAnswer && (
+							<p className="rounded-sm text-sm text-blue-300">
+								{question.answer}
+							</p>
+						)}
+					</div>
+				</div>
+				<div className="flex gap-x-5 py-2 text-sm">
+					<div className="flex items-center gap-x-2 text-slate-500">
+						<span>Category:</span>
+						<span className="text-xs">Science</span>
+					</div>
+					<div className="flex items-center gap-x-2 text-slate-500">
+						<span className="">Difficulty:</span>
+						<span className="text-xs">1</span>
+					</div>
+				</div>
+			</div>
+			<div className="p-4 flex items-center justify-center">
 				<button
 					onClick={() => {
 						mutation.mutate(question.id);
+						queryClient.invalidateQueries(['questions']);
 					}}
-					className="text-slate-600 hover:bg-blue-200 p-2 rounded-xl border border-transparent focus:border-slate-200 focus:bg-blue-200"
+					className="text-red-400"
 				>
 					<AiOutlineDelete />
 				</button>
-			</div>
-			<div className="mt-5">
-				<button
-					disabled={mutation.isLoading}
-					onClick={handleAnswerVisibility}
-					className={
-						mutation.isLoading
-							? 'cursor-not-allowed bg-blue-400 py-1 px-2 shadow-sm text-white rounded-sm border text-sm font-medium hover:bg-blue-600 w-28'
-							: 'bg-blue-400 py-1 px-2 shadow-sm text-white rounded-sm border text-sm font-medium hover:bg-blue-600 w-28'
-					}
-				>
-					{!showAnswer ? 'Show answer' : 'Hide answer'}
-				</button>
-				{showAnswer && (
-					<p className="rounded-sm text-sm text-slate-500 mt-4">
-						{question.answer}
-					</p>
-				)}
 			</div>
 		</div>
 	);
