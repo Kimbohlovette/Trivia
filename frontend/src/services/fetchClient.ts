@@ -1,12 +1,12 @@
 import {
+	PlayPayload,
+	QuestionType,
 	CategoryType,
 	CreateFormData,
-	QuestionType,
 	QuestionsData,
 } from '../types';
 
-///
-const baseUrl = 'http://localhost:8080';
+const baseUrl = 'http://localhost:5000';
 
 export const getQuestionsData = async (): Promise<QuestionsData> => {
 	const res = await fetch(`${baseUrl}/questions`);
@@ -50,6 +50,20 @@ export const createQuestion = async (
 ): Promise<{ success: true }> => {
 	return await (
 		await fetch(`${baseUrl}/questions/create`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(payload),
+		})
+	).json();
+};
+
+export const playQuiz = async (
+	payload: PlayPayload
+): Promise<QuestionType | null> => {
+	return await (
+		await fetch(`${baseUrl}/quizzes`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

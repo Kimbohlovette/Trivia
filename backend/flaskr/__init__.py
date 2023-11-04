@@ -133,7 +133,7 @@ def create_app(test_config=None):
         def play():
             body = request.get_json()
             quiz_category = body.get('quiz_category')['type']
-            previous_questions = body.get('previous_questions')
+            previous_questions = body.get('previous_quizzes')
             if quiz_category == "" or previous_questions is None:
                 abort(422)
 
@@ -146,10 +146,11 @@ def create_app(test_config=None):
 
                     if not_prev_selected_questions == []:
                         return jsonify({"question": None})
+
                     random_index = random.randint(
                         0, len(not_prev_selected_questions) - 1)
-                    random_question = not_prev_selected_questions[random_index].format(
-                    )
+                    
+                    random_question = not_prev_selected_questions[random_index].format()
 
                     return jsonify({"question": random_question})
 

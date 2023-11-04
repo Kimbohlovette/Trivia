@@ -18,9 +18,16 @@ export interface CategoryType {
 	type: string;
 }
 
-export interface CreateFormData {
-	question: string;
-	answer: string;
-	difficulty: number;
-	category: number;
+export type CreateFormData = Omit<QuestionType, 'id'>;
+
+export interface QuizInfo {
+	played: QuestionType[];
+	runningScore: number;
+}
+
+export interface PlayPayload {
+	previous_quizzes: Pick<QuestionType, 'id'>[];
+	running_score: number;
+	quiz_category: CategoryType;
+	user_id: number;
 }

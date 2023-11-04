@@ -1,6 +1,35 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { QuestionType, QuizInfo } from '../types';
+import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { playQuiz } from '../services/fetchClient';
 
 const Play = () => {
+	const savedQuizInfo = localStorage.getItem('@quizInfo');
+
+	const [playedQuizzes, setPlayedQuizzes] = useState<QuestionType[]>([]);
+	const [runningScore, setRunningScore] = useState<number>(0);
+	const [currentQuiz, setCurrentQuiz] = useState<QuestionType | null>(null);
+	useEffect(() => {
+		if (savedQuizInfo) {
+			setPlayedQuizzes(JSON.parse(savedQuizInfo).played);
+			setRunningScore(JSON.parse(savedQuizInfo).runningScore);
+		}
+	}, []);
+
+	let { data, isLoading, error } = useQuery<QuestionType | null, Error>({
+		queryKey: ['question'],
+		queryFn: () =>
+			playQuiz({
+				previous_quizzes: playedQuizzes,
+				running_score: runningScore,
+				quiz_category: { type: 'click', id: 0 },
+				user_id: 23,
+			}),
+
+		staleTime: 1000,
+	});
+
 	const {
 		register,
 		handleSubmit,
@@ -42,18 +71,24 @@ const Play = () => {
 						</button>
 					</form>
 				</div>
-				<div className="py-8 flex flex-col sm:flex-row sm:[&>*]:flex-1 sm:[&>*]:justify-between [&>*]:flex gap-2">
+				<div className="py-8 flex flex-col sm:flex-row sm:[&>*]:flex-1 [&>*]:justify-between [&>*]:flex gap-2">
 					<div className="py-2 px-4 rounded-md my-1 bg-slate-50">
 						<span className="text-slate-600">Wins</span>
-						<span className="text-blue-300">5</span>
+						<span className="text-blue-300 text-lg font-semibold">
+							{runningScore}
+						</span>
 					</div>
 					<div className="py-2 px-4 rounded-md my-1 bg-slate-50">
 						<span className="text-slate-600">Attempts left</span>
-						<span className="text-blue-300">0</span>
+						<span className="text-blue-300 text-lg font-semibold">
+							{5 - playedQuizzes.length}
+						</span>
 					</div>
 					<div className="py-2 px-4 rounded-md my-1 bg-slate-50">
 						<span className="text-slate-600">Total Rewards</span>
-						<span className="text-blue-300">543</span>
+						<span className="text-blue-300 text-lg font-semibold">
+							{runningScore}
+						</span>
 					</div>
 				</div>
 			</div>
