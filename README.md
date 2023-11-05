@@ -2,13 +2,20 @@
 
 Trivia web application is a trivia game running on the web. Students and/or competitors are asked questions about interesting but unimportant subjects. Students can take questions from a certain category or from all category play the trivia game.
 
-![The dashboard for trivia application](./shared/assets/Screenshot_20220903_045907.png)
+Remote Server URL: https://trivia-api-zck0.onrender.com
+Remote App Demo: https://trivia23.vercel.app
+
+![image](https://github.com/Kimbohlovette/Trivia/assets/37558983/993eb2ba-6df4-4f11-a989-3e18b194cf3d)
+
 
 ## Code style
 Code style follows the PEP8 style guide
 
 # Getting Started
 
+## Quick method
+Install docker, docker-compose
+Clone the repository to your local machine with git clone 
 ## Prerequisites
 
 - Nodejs - Install nodejs to run the React frontend library and npm ( a package manager for nodejs applications)
