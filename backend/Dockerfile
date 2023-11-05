@@ -8,10 +8,10 @@ RUN source venv/bin/activate
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-COPY . .
-ENV DB_NAME=postgres
-ENV DB_PASSWORD=postgres
-ENV DB_HOST=db
-ENV DB_USER=root
+# COPY . .
+# ENV DB_NAME=postgres
+# ENV DB_PASSWORD=postgres
+# ENV DB_HOST=trivia
+# ENV DB_USER=root
 
 ENTRYPOINT ["gunicorn", "-b", ":8080", "flaskr:create_app()"]

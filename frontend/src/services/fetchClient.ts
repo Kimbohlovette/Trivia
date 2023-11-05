@@ -6,7 +6,7 @@ import {
 	QuestionsData,
 } from '../types';
 
-const baseUrl = 'http://localhost:5000';
+const baseUrl = 'http://localhost:8080';
 
 export const getQuestionsData = async (): Promise<QuestionsData> => {
 	const res = await fetch(`${baseUrl}/questions`);
