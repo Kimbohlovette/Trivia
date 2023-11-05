@@ -68,7 +68,7 @@ const AddQuestion = () => {
 						name="answer"
 						type="text"
 					/>
-					<div className="flex gap-2">
+					<div className="flex flex-col sm:flex-row gap-2">
 						<div className="flex-1 flex flex-col">
 							<label
 								className="text-slate-600 font-medium"
@@ -93,7 +93,7 @@ const AddQuestion = () => {
 									})}
 							</select>
 						</div>
-						<div className="flex-1 flex flex-col">
+						<div className="flex-1 sm:w-full flex flex-col">
 							<label
 								className="text-slate-600 font-medium"
 								htmlFor="difficulty"

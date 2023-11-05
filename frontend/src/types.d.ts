@@ -26,7 +26,7 @@ export interface QuizInfo {
 }
 
 export interface PlayPayload {
-	previous_quizzes: Pick<QuestionType, 'id'>[];
+	previous_quizzes: number[];
 	running_score: number;
 	quiz_category: CategoryType;
 	user_id: number;

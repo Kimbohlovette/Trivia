@@ -1,34 +1,30 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { QuestionType, QuizInfo } from '../types';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { playQuiz } from '../services/fetchClient';
 
 const Play = () => {
 	const savedQuizInfo = localStorage.getItem('@quizInfo');
-
-	const [playedQuizzes, setPlayedQuizzes] = useState<QuestionType[]>([]);
+	const [playedQuizzes, setPlayedQuizzes] = useState<number[]>([]);
 	const [runningScore, setRunningScore] = useState<number>(0);
 	const [currentQuiz, setCurrentQuiz] = useState<QuestionType | null>(null);
+
 	useEffect(() => {
 		if (savedQuizInfo) {
 			setPlayedQuizzes(JSON.parse(savedQuizInfo).played);
 			setRunningScore(JSON.parse(savedQuizInfo).runningScore);
-		}
-	}, []);
-
-	let { data, isLoading, error } = useQuery<QuestionType | null, Error>({
-		queryKey: ['question'],
-		queryFn: () =>
 			playQuiz({
 				previous_quizzes: playedQuizzes,
 				running_score: runningScore,
 				quiz_category: { type: 'click', id: 0 },
 				user_id: 23,
-			}),
-
-		staleTime: 1000,
-	});
+			}).then((res) => {
+				setCurrentQuiz(res);
+				console.log('Inside the loader: ', res);
+			});
+		}
+	}, []);
 
 	const {
 		register,
@@ -38,20 +34,27 @@ const Play = () => {
 	} = useForm();
 
 	const onSubmit: SubmitHandler<{}> = (payload) => {
-		console.log(payload);
+		playQuiz({
+			previous_quizzes: playedQuizzes,
+			running_score: runningScore,
+			quiz_category: { type: 'click', id: 0 },
+			user_id: 23,
+		}).then((res) => {
+			setCurrentQuiz(res);
+			setPlayedQuizzes((state) => [...state, res.id]);
+		});
 		reset();
 	};
 	return (
 		<div className="flex items-center justify-center">
-			<div className="divide-y">
+			<div className="divide-y w-full max-w-lg">
 				<div className="mb-5">
 					<div className="mt-8">
 						<h1 className="text-blue-400 my-3 font-semibold text-2xl">
 							Question
 						</h1>
 						<p className="my-4 text-slate-600 font-light max-w-xl">
-							Lorem ipsum dolor sit, amet consectetur adipisicing
-							elit. Sit porro quasi, dolores quos mollitia qua?
+							{currentQuiz?.question}
 						</p>
 					</div>
 					<form

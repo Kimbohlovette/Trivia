@@ -59,9 +59,7 @@ export const createQuestion = async (
 	).json();
 };
 
-export const playQuiz = async (
-	payload: PlayPayload
-): Promise<QuestionType | null> => {
+export const playQuiz = async (payload: PlayPayload): Promise<QuestionType> => {
 	return await (
 		await fetch(`${baseUrl}/quizzes`, {
 			method: 'POST',
