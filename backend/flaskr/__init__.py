@@ -145,14 +145,14 @@ def create_app(test_config=None):
                         question for question in questions if question.id not in previous_questions]
 
                     if not_prev_selected_questions == []:
-                        return jsonify({"question": None})
+                        return jsonify({})
 
                     random_index = random.randint(
                         0, len(not_prev_selected_questions) - 1)
                     
                     random_question = not_prev_selected_questions[random_index].format()
 
-                    return jsonify({"question": random_question})
+                    return jsonify(random_question)
 
                 else:
                     cat = Category.query.get()
@@ -164,14 +164,14 @@ def create_app(test_config=None):
                         question for question in questions if question.id not in previous_questions]
 
                     if not_prev_selected_questions == []:
-                        return jsonify({"question": None})
+                        return jsonify({})
 
                     random_index = random.randint(
                         0, len(not_prev_selected_questions) - 1)
                     random_question = not_prev_selected_questions[random_index].format(
                     )
 
-                    return jsonify({"question": random_question})
+                    return jsonify(random_question)
             except BaseException:
                 abort(422)
 
