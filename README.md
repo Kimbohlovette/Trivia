@@ -17,7 +17,7 @@ Install docker and docker-compose
 
 Clone the repository to your local machine with `git clone https://github.com/kimbohlovette/Trivia.git`
 
-Run the `docker-compose up` to start all trivia application services. That's the web app, server and the database.
+Move to the `Trivia` directory and run `docker-compose up` to start all trivia application services. That's the web app, server and the database.
 
 Web server will be the web app will be available on `localhost:3000` and the backend is available `localhost:8080`.
 
