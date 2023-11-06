@@ -117,14 +117,7 @@ Sample response:
 
 ```
 {
-  "categories": {
-    "1": "Science",
-    "2": "Art",
-    "3": "Geography",
-    "4": "History",
-    "5": "Entertainment",
-    "6": "Sports"
-  }
+  "categories": [ "Science", "Art", "Geography", "History", "Entertainment", "Sports" ]
 }
 
 ```
