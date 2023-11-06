@@ -12,11 +12,15 @@ Remote App Demo: https://trivia23.vercel.app
 ## Code style
 Code style follows the PEP8 style guide
 
-# Getting Started
-
 ## Quick method
-Install docker, docker-compose
-Clone the repository to your local machine with git clone 
+Install docker and docker-compose
+Clone the repository to your local machine with git clone with `git clone https://github.com/kimbohlovette/Trivia.git`
+Run the `docker-compose up` to start all trivia application services. That's the web app, server and the database.
+Web server will be the web app will be available on `localhost:3000` and the backend is available `localhost:8080`.
+
+
+# Setting up each services individually without docker.
+
 ## Prerequisites
 
 - Nodejs - Install nodejs to run the React frontend library and npm ( a package manager for nodejs applications)
