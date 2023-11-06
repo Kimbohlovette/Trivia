@@ -15,7 +15,7 @@ Code style follows the PEP8 style guide
 ## Quick method
 Install docker and docker-compose
 
-Clone the repository to your local machine with git clone with `git clone https://github.com/kimbohlovette/Trivia.git`
+Clone the repository to your local machine with `git clone https://github.com/kimbohlovette/Trivia.git`
 
 Run the `docker-compose up` to start all trivia application services. That's the web app, server and the database.
 
