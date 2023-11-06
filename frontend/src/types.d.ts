@@ -21,7 +21,7 @@ export interface CategoryType {
 export type CreateFormData = Omit<QuestionType, 'id'>;
 
 export interface QuizInfo {
-	played: QuestionType[];
+	played: number[];
 	runningScore: number;
 }
 

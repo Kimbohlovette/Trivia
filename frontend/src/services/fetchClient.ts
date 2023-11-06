@@ -9,7 +9,7 @@ import {
 const baseUrl =
 	process.env.NODE_ENV === 'production'
 		? 'https://trivia-api-zck0.onrender.com'
-		: 'http://localhost:8080';
+		: 'https://trivia-api-zck0.onrender.com';
 export const getQuestionsData = async (): Promise<QuestionsData> => {
 	const res = await fetch(`${baseUrl}/questions`);
 	return await res.json();
