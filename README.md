@@ -4,7 +4,7 @@ Trivia web application is a trivia game running on the web. Students and/or comp
 
 Remote Server URL: https://trivia-api-zck0.onrender.com
 
-Remote App Demo: https://trivia23.vercel.app
+Remote App Demo: https://trivia-two-topaz.vercel.app
 
 ![image](https://github.com/Kimbohlovette/Trivia/assets/37558983/993eb2ba-6df4-4f11-a989-3e18b194cf3d)
 
