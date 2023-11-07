@@ -21,7 +21,7 @@ Execute the command `cd Trivia` to move to the project directory.
 
 Run `docker-compose up` to start all trivia application services (database service, api service and the web service).
 
-Web server will be the web app will be available on `localhost:3000` and the backend is available `localhost:8080`.
+The frontend will serve locally on port `3000` and the backend is available locally on port `8080`.
 
 
 ## Setting up each services individually without docker.
