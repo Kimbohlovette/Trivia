@@ -1,6 +1,6 @@
 # Trivia
 
-Trivia web application is a trivia game running on the web. Students and/or competitors are asked questions about interesting but unimportant subjects. Students can take questions from a certain category or from all category play the trivia game.
+Trivia web application is a trivia game running on the web. Students are asked questions about interesting but unimportant subjects. Students can take questions from a certain category or from all category play the trivia game.
 
 Remote Server URL: https://trivia-api-zck0.onrender.com
 
@@ -12,17 +12,19 @@ Remote App Demo: https://trivia-two-topaz.vercel.app
 ## Code style
 Code style follows the PEP8 style guide
 
-## Quick method
+## Quick installation
 Install docker and docker-compose
 
 Clone the repository to your local machine with `git clone https://github.com/kimbohlovette/Trivia.git`
 
-Move to the `Trivia` directory and run `docker-compose up` to start all trivia application services. That's the web app, server and the database.
+Execute the command `cd Trivia` to move to the project directory.
+
+Run `docker-compose up` to start all trivia application services (database service, api service and the web service).
 
 Web server will be the web app will be available on `localhost:3000` and the backend is available `localhost:8080`.
 
 
-# Setting up each services individually without docker.
+## Setting up each services individually without docker.
 
 ## Prerequisites
 
